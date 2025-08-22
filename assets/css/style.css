@@ -9,3 +9,35 @@
 a {
     text-decoration: none;
 }
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #ccc;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    font-size: 12vw;
+    color: rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    position: relative;
+    transform-origin: bottom;
+    transform: skewX(50deg);
+}
+
+h1::before {
+    content: attr(data-title);
+    position: absolute;
+    color: #fff;
+    transform-origin: bottom;
+    transform: skewX(-50deg) translate(-70px, 30px) scaleY(1.5);
+}
