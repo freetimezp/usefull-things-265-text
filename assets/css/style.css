@@ -1,43 +1,121 @@
 * {
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    list-style: none;
-    list-style-type: none;
 }
 
-a {
-    text-decoration: none;
+:root {
+    --bg: #07080a;
+    --accent: #9be7ff;
 }
-
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 html,
 body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #07080a 0%, #0f1724 100%);
+    font-family: Inter, system-ui, sans-serif;
+    overflow: hidden;
+}
+#app {
+    position: relative;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
-    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.center {
+/* Three canvas fills whole viewport */
+canvas.webgl {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    display: block;
 }
 
-h1 {
-    font-size: 12vw;
-    color: rgba(0, 0, 0, 0.2);
-    text-transform: uppercase;
+/* center content */
+.center {
     position: relative;
-    transform-origin: bottom;
-    transform: skewX(50deg);
+    z-index: 6;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-h1::before {
+.glass-panel {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    inset: 20vh 10vw;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px) saturate(150%);
+    box-shadow: 0 10px 40px rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    mix-blend-mode: overlay;
+}
+
+h1.title {
+    font-size: 10vw;
+    letter-spacing: 6px;
+    color: rgba(255, 255, 255, 0.12);
+    text-transform: uppercase;
+    margin: 0;
+    position: relative;
+    transform: translateZ(80px) skewX(12deg);
+    pointer-events: auto;
+    z-index: 10;
+}
+
+h1.title::before {
     content: attr(data-title);
     position: absolute;
-    color: #fff;
-    transform-origin: bottom;
-    transform: skewX(-50deg) translate(-70px, 30px) scaleY(1.5);
+    left: 0;
+    top: 0;
+    color: white;
+    opacity: 0.85;
+    transform: translateZ(120px) skewX(-12deg);
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.05);
+}
+
+/* subtle subtitle */
+p.lead {
+    color: rgba(155, 231, 255, 0.18);
+    margin-top: 12px;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+}
+
+/* shards container sits above shader but behind text */
+#shards {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* small helper to show pointer when interacting */
+.cursor {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* responsive tweaks */
+@media (max-width: 700px) {
+    h1.title {
+        font-size: 18vw;
+    }
 }

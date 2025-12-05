@@ -9,10 +9,22 @@
     </head>
 
     <body>
-        <div class="center">
-            <h1 data-title="Creative">Creative</h1>
+        <div id="app">
+            <canvas id="webgl" class="webgl"></canvas>
+            <canvas id="webgl2" class="webgl"></canvas>
+
+            <div class="glass-panel" aria-hidden></div>
+
+            <div id="shards"></div>
+
+            <div class="center">
+                <h1 class="title" data-title="Treasure">Treasure</h1>
+                <p class="lead">Liquid refraction shader • Floating glass shards • Mouse reactive</p>
+            </div>
+
+            <div class="cursor" id="cursor"></div>
         </div>
 
-        <script src="./assets/js/main.js"></script>
+        <script type="module" src="./assets/js/main.js"></script>
     </body>
 </html>
