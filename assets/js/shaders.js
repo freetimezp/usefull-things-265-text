@@ -44,9 +44,9 @@ export const frag = `
 
     vec2 displaced = uv + vec2(strength * (m.x*0.5 + 0.2), strength * (m.y*0.5));
 
-    // build iridescent color wave
+    // build color wave
     vec3 col = vec3(0.02, 0.03, 0.06);
-    col += 0.6 * vec3(0.2 + 0.6*noise(displaced*3.0 + t), 0.5 + 0.4*noise(displaced*4.0 - t*1.2), 0.6 + 0.4*noise(displaced*2.0 + t*0.5));
+    col += 0.1 * vec3(0.2 + 0.6*noise(displaced*3.0 + t), 0.5 + 0.4*noise(displaced*4.0 - t*1.2), 0.6 + 0.4*noise(displaced*2.0 + t*0.5));
 
     // glass-like rim highlight based on view angle (fake) and local noise
     float rim = smoothstep(0.4, 0.0, length(displaced - 0.5))*0.7;
@@ -62,14 +62,11 @@ export const frag = `
 
 export const vert = `
   precision highp float;
-  attribute vec3 position;
-  attribute vec2 uv;
-  uniform mat4 modelViewMatrix;
-  uniform mat4 projectionMatrix;
   varying vec2 vUv;
   void main(){
     vUv = uv;
-    vec4 pos = vec4(position,1.0);
-    gl_Position = projectionMatrix * modelViewMatrix * pos;
+
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * mvPosition;
   }
   `;

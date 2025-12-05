@@ -87,7 +87,7 @@ h1.title::before {
 
 /* subtle subtitle */
 p.lead {
-    color: rgba(155, 231, 255, 0.18);
+    color: #ccc;
     margin-top: 12px;
     font-size: 1.1rem;
     letter-spacing: 0.08em;
